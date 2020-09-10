@@ -6,7 +6,7 @@ pipeline {
         maven "Maven"
     }
 
-//     stages {
+    stages {
 //         stage("Clone from VCS") {
 //             steps {
 //                 script {
