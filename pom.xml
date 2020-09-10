@@ -151,19 +151,6 @@
         </plugins>
     </build>
 
-    <!-- distributionManagement>
-        <repository>
-            <id>Nexus</id>
-            <name>Internal Releases</name>
-            <url>http://localhost:8081/repository/maven-releases/</url>
-        </repository>
-        <snapshotRepository>
-            <id>Nexus</id>
-            <name>Internal Snapshots</name>
-            <url>http://localhost:8081/repository/maven-snapshots/</url>
-        </snapshotRepository>
-    </distributionManagement -->
-
     <profiles>
         <!-- GlassFish specific version of build -->
         <profile>
