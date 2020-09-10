@@ -6,15 +6,15 @@ pipeline {
         maven "Maven"
     }
 
-    stages {
-        stage("Clone from VCS") {
-            steps {
-                script {
-                    git branch: "${BRANCH_NAME}", credentialsId: 'github-user-credential', url: 'https://github.com/hofmanr/cargotracker.git'
-                    // git 'https://github.com/hofmanr/cargotracker.git';
-                }
-            }
-        }
+//     stages {
+//         stage("Clone from VCS") {
+//             steps {
+//                 script {
+//                     git branch: "${BRANCH_NAME}", credentialsId: 'github-user-credential', url: 'https://github.com/hofmanr/cargotracker.git'
+//                     // git 'https://github.com/hofmanr/cargotracker.git';
+//                 }
+//             }
+//         }
 
         stage("Build") {
             when { anyOf { branch 'release/*'; branch 'master'; branch 'feature/*'; branch 'hotfix/*' } }
