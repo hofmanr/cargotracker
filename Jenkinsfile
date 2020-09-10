@@ -16,30 +16,33 @@ pipeline {
             }
         }
 
-        stage("Maven Build") {
+        stage("Build") {
+            when { anyOf { branch 'release/*'; branch 'master'; branch 'feature/*'; branch 'hotfix/*' } }
             steps {
                 script {
                     sh 'mvn help:active-profiles'
-                    sh "mvn package -DskipTests=true"
+                    sh "mvn clean package"
                 }
             }
         }
 
         stage("Deploy") {
+            when { anyOf { branch 'master'; branch 'feature/*'; branch 'hotfix/*' } }
             steps {
                 configFileProvider(
                     [configFile(fileId: 'global-maven-settings', variable: 'MAVEN_SETTINGS')]) {
                         sh 'mvn -s $MAVEN_SETTINGS help:active-profiles'
                         sh 'mvn -s $MAVEN_SETTINGS -DskipTests deploy -Pjenkins'
-
                     }
             }
         }
+    }
 
-        stage('Archive TestResults') {
+       stage("Archive") {
+            when { anyOf { branch 'feature/*' } }
             steps {
-                junit '**/target/surefire-reports/TEST-*.xml'
+                archiveArtifacts artifacts: 'target/*.war', followSymlinks: false
             }
         }
-    }
+
 }
