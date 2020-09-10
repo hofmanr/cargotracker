@@ -36,7 +36,6 @@ pipeline {
                     }
             }
         }
-    }
 
        stage("Archive") {
             when { anyOf { branch 'feature/*' } }
@@ -44,5 +43,6 @@ pipeline {
                 archiveArtifacts artifacts: 'target/*.war', followSymlinks: false
             }
         }
+    }
 
 }
